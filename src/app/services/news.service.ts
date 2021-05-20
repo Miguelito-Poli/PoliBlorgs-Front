@@ -14,6 +14,9 @@ export class NewsService {
 
   }
 
+  create(data: any): Observable<any> {
+    return this.http.post(`${this.url}`, data)
+  }
 
   getCustomers(): Observable<news[]> {
     return this.http.get<news[]>(`${this.url}`);
