@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="card">
+        <h3 class="text-center">Lista de noticias</h3>
+        <div class="card-body">
+            <div class="form-group form-inline">
+                Buscar noticia por nombre:
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <th>Id</th>
+                    <th>Author</th>
+                    <th>Fecha</th>
+                    <th>Titulo</th>
+                    <th>Noticia</th>
+
+                    <th></th>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let new of news">
+
+                        <td>{{new.id}}</td>
+                        <td>{{new.author}}</td>
+                        <td>{{new.date}}</td>
+                        <td>{{new.title}}</td>
+                        <td>{{new.body}}</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" (click)="triggerModal(modalData, new)">
+                                Edit </button>
+                            &nbsp;
+                            <button class='btn btn-danger btn-sm' (click)="deleteNewsById(new.id)">
+                                Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit New</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div style="width: 400px; margin: auto;">
+            <div class="submit-form">
+                <div class="form-group">
+                    <label for="id">id</label>
+                    <input
+                    disabled 
+                    type="text" 
+                    class="form-control" 
+                    id="id" 
+                    required
+                    [(ngModel)]="currentNews.id"
+                    name="id" 
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" id="author" required [(ngModel)]="currentNews.author"
+                        name="author" />
+                </div>
+                <div class="form-group">
+                    <label for="date">Fecha</label>
+                    <input type="text" class="form-control" id="date" required [(ngModel)]="currentNews.date"
+                        name="date" />
+                </div>
+                <div class="form-group">
+                    <label for="title">Titulo</label>
+                    <input type="text" class="form-control" id="title" required [(ngModel)]="currentNews.title"
+                        name="title" />
+                </div>
+                <div class="form-group">
+                    <label for="body">Noticia</label>
+                    <input type="text" class="form-control" id="body" required [(ngModel)]="currentNews.body"
+                        name="body" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="updateBook()"
+            (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
